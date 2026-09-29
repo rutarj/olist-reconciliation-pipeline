@@ -269,4 +269,4 @@ Caveat: November 2017 was 62.9% above October 2017 (Black Friday). With one year
 
 Data: **Brazilian E-Commerce Public Dataset by Olist**, https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce. Provided by Olist. Licensed **CC BY-NC-SA 4.0** (Attribution, NonCommercial, ShareAlike). Derived tables in `data/processed/` and the fixtures in `tests/fixtures/` are shared under the same license. Download source, date and checksums: [`data/SOURCE.md`](data/SOURCE.md).
 
-*Metrics generated 2026-09-29T07:24:44+00:00.*
+*Metrics generated 2026-09-29T07:27:12+00:00.*

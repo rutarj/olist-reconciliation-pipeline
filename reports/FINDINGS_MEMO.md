@@ -37,4 +37,4 @@ Everything else is small and has a clear cause. Only **5 orders (R$ 77.54)** hav
 2. **Record card interest and discounts where the sale is recorded.** Book installment interest as its own revenue line and write discounts onto the order at checkout. Those two causes are 81.5% of the orders where both systems have data but disagree. Fixing them lets Finance and Operations report one number.
 3. **Run this reconciliation every day and fix the shipping timestamp feed.** Alert when the match rate drops or a high-severity exception appears, so problems are caught in days, not at month end. Start with the 166 impossible shipping dates.
 
-*Source: `reports/metrics.json`, generated 2026-09-29T07:24:44+00:00 by `run_pipeline.py`. Data: Brazilian E-Commerce Public Dataset by Olist (Kaggle), CC BY-NC-SA 4.0.*
+*Source: `reports/metrics.json`, generated 2026-09-29T07:27:12+00:00 by `run_pipeline.py`. Data: Brazilian E-Commerce Public Dataset by Olist (Kaggle), CC BY-NC-SA 4.0.*
