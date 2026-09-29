@@ -9,6 +9,7 @@ Runs every step from raw CSVs to reports. Safe to re-run: every output is rebuil
   5. star schema -> data/processed (CSV + Parquet)
   6. KPIs + forecast -> reports/metrics.json
   7. reports: summary.xlsx, dashboard.html
+  8. docs: README.md, reports/FINDINGS_MEMO.md, NOTES.md, docs/DATA_DICTIONARY.md
 """
 from __future__ import annotations
 
@@ -20,11 +21,13 @@ from pathlib import Path
 import duckdb
 
 from src.config import Paths
+from src.data_dictionary import build_data_dictionary
 from src.download import ensure_raw_data
 from src.forecast import forecast_table, run_forecast
 from src.load import load_raw
 from src.metrics import build_metrics, compute_kpis, write_metrics
 from src.reconcile import run_reconciliation
+from src.render_docs import render_all
 from src.report_excel import build_excel
 from src.report_html import build_dashboard
 from src.star_schema import build_star_schema
@@ -62,6 +65,11 @@ def run(paths: Paths, download: bool = True) -> dict:
     log.info("step 7: reports")
     build_excel(con, metrics, kpis, paths.reports / "summary.xlsx")
     build_dashboard(con, metrics, paths.reports / "dashboard.html")
+
+    log.info("step 8: docs (numbers read from metrics.json)")
+    build_data_dictionary(con, paths.processed, paths.reports, paths.docs / "docs" / "DATA_DICTIONARY.md")
+    for doc in render_all(paths.reports / "metrics.json", paths.docs, paths.reports):
+        log.info("  rendered %s", doc)
 
     log.info("done in %.1fs", time.time() - t0)
     return {"metrics": metrics, "recon": recon, "con": con}

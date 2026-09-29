@@ -75,6 +75,14 @@ def build_metrics(con, *, raw_counts: dict, dq: dict, star_counts: dict,
     top_state = k["top_states"][0] if k["top_states"] else {}
     top_cat = k["top_categories"][0] if k["top_categories"] else {}
 
+    value_mm = h["orders_value_mismatch"] or 0
+    explained_mm = value_mm - (by_cat.get("unexplained", {}).get("orders", 0))
+    check_counts: dict[str, int] = {}
+    for r in k["exceptions_by_check"]:
+        check_counts[r["check_name"]] = check_counts.get(r["check_name"], 0) + r["exceptions"]
+    rv = {r["reconciliation_status"]: r for r in k["reviews_by_match"]}
+    pareto = k["pareto"]
+
     return {
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "currency": "BRL",
@@ -82,6 +90,7 @@ def build_metrics(con, *, raw_counts: dict, dq: dict, star_counts: dict,
         "dataset": {
             "raw_rows": raw_counts,
             "raw_rows_total": rows_in,
+            "tables_loaded": len(raw_counts),
             "first_purchase_date": dates[0].isoformat() if dates[0] else None,
             "last_purchase_date": dates[1].isoformat() if dates[1] else None,
         },
@@ -100,8 +109,19 @@ def build_metrics(con, *, raw_counts: dict, dq: dict, star_counts: dict,
             **h,
             "abs_gap_pct_of_paid": round(100.0 * h["abs_gap_brl"] / h["paid_brl"], 3) if h["paid_brl"] else None,
             "categories": k["gap_by_category"],
+            "categories_used": len(k["gap_by_category"]),
+            "value_mismatch_explained": explained_mm,
+            "value_mismatch_explained_pct": round(100.0 * explained_mm / value_mm, 2) if value_mm else None,
+            "interest_and_discount_pct_of_value_mismatch": round(
+                100.0 * (by_cat.get("installment_interest", {}).get("orders", 0)
+                         + by_cat.get("untracked_discount", {}).get("orders", 0)) / value_mm, 2) if value_mm else None,
+            "unexplained_pct_of_orders": round(100.0 * h["orders_unexplained"] / h["orders_total"], 4)
+            if h["orders_total"] else None,
             "by_category": by_cat,
-            "pareto": k["pareto"],
+            "pareto": {**pareto,
+                       "pct_of_unmatched_orders": round(100.0 * pareto["orders_for_80pct_of_gap"]
+                                                        / pareto["unmatched_orders"], 1)
+                       if pareto["unmatched_orders"] else None},
             "interest": {**k["interest_rate_card_share"],
                          "median_gap_pct_2x": interest_steps.get(2, {}).get("median_gap_pct"),
                          "median_gap_pct_12x": interest_steps.get(12, {}).get("median_gap_pct"),
@@ -118,15 +138,24 @@ def build_metrics(con, *, raw_counts: dict, dq: dict, star_counts: dict,
         "exceptions": {
             "total": int(sum(r["exceptions"] for r in k["exceptions_by_severity"])),
             "by_severity": k["exceptions_by_severity"],
+            "by_severity_name": {r["severity"]: r["exceptions"] for r in k["exceptions_by_severity"]},
+            "by_check_name": check_counts,
             "by_check": k["exceptions_by_check"],
         },
         "kpis": {
             "delivery": k["delivery"],
-            "reviews_by_match": {r["reconciliation_status"]: r for r in k["reviews_by_match"]},
+            "reviews_by_match": rv,
+            "review_gap_matched_minus_unmatched": round(rv["matched"]["avg_review_score"]
+                                                        - rv["unmatched"]["avg_review_score"], 2)
+            if {"matched", "unmatched"} <= rv.keys() else None,
             "reviews_by_category": {r["gap_category"]: r for r in k["reviews_by_category"]},
             "monthly": k["monthly"],
         },
-        "forecast": {**forecast, "nov_2017_uplift_vs_oct_pct": nov_uplift},
+        "forecast": {**forecast, "nov_2017_uplift_vs_oct_pct": nov_uplift,
+                     "horizon_months": len(forecast.get("forecast", [])),
+                     "model_minus_baseline_mape_pp": round(forecast["best_model_mape_pct"]
+                                                           - forecast["best_baseline_mape_pct"], 2)
+                     if not forecast.get("skipped") else None},
         "star_schema_rows": star_counts,
     }
 

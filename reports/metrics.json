@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T07:18:58+00:00",
+  "generated_at": "2026-09-29T07:24:44+00:00",
   "currency": "BRL",
   "match_tolerance_brl": 0.01,
   "dataset": {
@@ -14,6 +14,7 @@
       "category_translation": 71
     },
     "raw_rows_total": 550759,
+    "tables_loaded": 8,
     "first_purchase_date": "2016-09-04",
     "last_purchase_date": "2018-10-17"
   },
@@ -109,7 +110,7 @@
     "categories": [
       {
         "gap_category": "missing_items",
-        "severity": "medium",
+        "severity": "high/medium",
         "orders": 775,
         "share_of_orders_pct": 71.8258,
         "abs_gap_brl": 162591.95,
@@ -178,10 +179,15 @@
         "share_of_unmatched_gap_pct": 0.0
       }
     ],
+    "categories_used": 7,
+    "value_mismatch_explained": 298,
+    "value_mismatch_explained_pct": 98.35,
+    "interest_and_discount_pct_of_value_mismatch": 81.52,
+    "unexplained_pct_of_orders": 0.005,
     "by_category": {
       "missing_items": {
         "gap_category": "missing_items",
-        "severity": "medium",
+        "severity": "high/medium",
         "orders": 775,
         "share_of_orders_pct": 71.8258,
         "abs_gap_brl": 162591.95,
@@ -252,7 +258,8 @@
     },
     "pareto": {
       "orders_for_80pct_of_gap": 344,
-      "unmatched_orders": 1079
+      "unmatched_orders": 1079,
+      "pct_of_unmatched_orders": 31.9
     },
     "interest": {
       "interest_orders": 232,
@@ -681,6 +688,31 @@
         "reconciliation": 276
       }
     ],
+    "by_severity_name": {
+      "high": 180,
+      "medium": 1658,
+      "low": 1724
+    },
+    "by_check_name": {
+      "carrier_before_purchase": 166,
+      "recon_missing_items": 775,
+      "recon_unexplained": 5,
+      "recon_missing_payment": 1,
+      "duplicate_key": 814,
+      "delivered_before_carrier": 23,
+      "recon_untracked_discount": 15,
+      "orphan_foreign_key": 13,
+      "delivered_without_date": 8,
+      "recon_voucher_related": 7,
+      "delivery_date_on_undelivered_order": 6,
+      "allowed_values": 3,
+      "invalid_installments": 2,
+      "carrier_before_approval": 1359,
+      "recon_installment_interest": 232,
+      "payment_sequence_gap": 80,
+      "recon_rounding": 44,
+      "zero_value_payment": 9
+    },
     "by_check": [
       {
         "source": "data_quality",
@@ -844,6 +876,7 @@
         "pct_reviews_1_or_2": 61.87
       }
     },
+    "review_gap_matched_minus_unmatched": 1.78,
     "reviews_by_category": {
       "matched": {
         "gap_category": "matched",
@@ -1451,6 +1484,7 @@
     "best_model": "moving_average_3m",
     "best_model_mape_pct": 10.87,
     "baseline_wins": true,
+    "verdict": "Honest result: a naive baseline wins. naive_last_value beats every model on the holdout, so the baseline is the forecast. A model that loses to 'same as last month' is not worth shipping.",
     "forecast": [
       {
         "month": "2018-09",
@@ -1465,7 +1499,9 @@
         "forecast_orders": 6512
       }
     ],
-    "nov_2017_uplift_vs_oct_pct": 62.9
+    "nov_2017_uplift_vs_oct_pct": 62.9,
+    "horizon_months": 3,
+    "model_minus_baseline_mape_pp": 2.13
   },
   "star_schema_rows": {
     "fact_orders": 99441,

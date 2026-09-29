@@ -1,0 +1,40 @@
+<!-- GENERATED FILE. Edit docs/templates/FINDINGS_MEMO.md.tmpl. Numbers come from reports/metrics.json. -->
+# Findings memo: do our sales and payment numbers agree?
+
+**To:** Operations and Finance leads · **Re:** Olist orders {{ dataset.first_purchase_date }} to {{ dataset.last_purchase_date }} · **Currency:** Brazilian real (R$, BRL)
+
+## Bottom line
+
+The two systems agree on **{{ reconciliation.match_rate_pct | pct }}** of {{ reconciliation.orders_total | int }} orders. The {{ reconciliation.orders_unmatched | int }} that do not agree add up to **{{ reconciliation.abs_gap_brl | brl }}**, about {{ reconciliation.abs_gap_pct_of_paid | pct }} of the {{ reconciliation.paid_brl | brl }} customers paid.
+
+Almost all of that money is one problem: **{{ reconciliation.missing_items.paid_brl | brl }} was paid on {{ reconciliation.missing_items.orders | int }} orders that have no items recorded.** {{ reconciliation.missing_items.canceled_or_unavailable_pct | pct }} of those orders were canceled or marked unavailable. We cannot see from this data whether those customers were refunded.
+
+Everything else is small and has a clear cause. Only **{{ reconciliation.orders_unexplained | int }} orders ({{ reconciliation.unexplained_abs_gap_brl | brl }})** have no explanation.
+
+## What we found
+
+| Cause | Orders | Money | What it means |
+|---|---:|---:|---|
+| Paid, but no items recorded | {{ reconciliation.missing_items.orders | int }} | {{ reconciliation.missing_items.paid_brl | brl }} | Canceled/unavailable orders still show a payment. Refund status unknown. |
+| Card interest on installment plans | {{ reconciliation.by_category.installment_interest.orders? | int }} | {{ reconciliation.by_category.installment_interest.abs_gap_brl? | brl }} | Customers who split card payments pay extra, on a fixed rate table. The order system does not record it. Normal, but it makes totals disagree. |
+| Discounts not recorded on the order | {{ reconciliation.by_category.untracked_discount.orders? | int }} | {{ reconciliation.by_category.untracked_discount.abs_gap_brl? | brl }} | Customers paid exactly 5% or 10% less than the price. The discount lives only in the payment. |
+| Voucher splits | {{ reconciliation.by_category.voucher_related.orders? | int }} | {{ reconciliation.by_category.voucher_related.abs_gap_brl? | brl }} | Card + voucher payments that overshoot the order total. |
+| Cent-level rounding | {{ reconciliation.by_category.rounding.orders? | int }} | {{ reconciliation.by_category.rounding.abs_gap_brl? | brl }} | Harmless. |
+| No payment recorded | {{ reconciliation.by_category.missing_payment.orders? | int }} | {{ reconciliation.by_category.missing_payment.abs_gap_brl? | brl }} | Goods recorded, no payment. |
+| Unexplained | {{ reconciliation.orders_unexplained | int }} | {{ reconciliation.unexplained_abs_gap_brl | brl }} | Needs a person to look. |
+
+**Customers notice.** Orders that do not reconcile average **{{ kpis.reviews_by_match.unmatched.avg_review_score | stars }} stars**, against **{{ kpis.reviews_by_match.matched.avg_review_score | stars }}** for orders that do. {{ kpis.reviews_by_match.unmatched.pct_reviews_1_or_2 | pct1 }} of their reviews are 1 or 2 stars.
+
+**Data you can trust.** We ran {{ data_quality.checks_run | int }} automatic checks on every record. {{ data_quality.pct_rows_clean | pct }} of rows passed all of them. The main problem: {{ exceptions.by_check_name.carrier_before_purchase? | int }} orders show a shipping date *before* the purchase date, which is impossible and most likely a timestamp problem in the carrier feed. No record was deleted; every issue is listed with a reason in `reports/summary.xlsx`.
+
+**Delivery.** {{ kpis.delivery.on_time_rate_pct | pct1 }} of delivered orders arrived on time. Late orders average {{ kpis.delivery.avg_review_late | stars }} stars.
+
+**Planning.** For the next {{ forecast.horizon_months | int }} months, plan on about **{{ forecast.forecast.0.forecast_orders | int }} orders per month**. The simple "same as last month" rule beat the statistical models we tested ({{ forecast.winner_mape_pct | pct1 }} average error on the last {{ forecast.horizon_months | int }} known months). Add a Black Friday uplift for November: last year November was {{ forecast.nov_2017_uplift_vs_oct_pct | pct1 }} above October.
+
+## Top 3 recommendations
+
+1. **Close out the {{ reconciliation.missing_items.paid_brl | brl0 }} paid-no-items orders.** Match the {{ reconciliation.missing_items.orders | int }} orders against refund records, largest first. {{ reconciliation.pareto.orders_for_80pct_of_gap | int }} orders hold 80% of all unmatched money, so the first pass is short. Any payment without a refund is either owed back to a customer or a revenue booking error.
+2. **Record card interest and discounts where the sale is recorded.** Book installment interest as its own revenue line and write discounts onto the order at checkout. Those two causes are {{ reconciliation.interest_and_discount_pct_of_value_mismatch | pct1 }} of the orders where both systems have data but disagree. Fixing them lets Finance and Operations report one number.
+3. **Run this reconciliation every day and fix the shipping timestamp feed.** Alert when the match rate drops or a high-severity exception appears, so problems are caught in days, not at month end. Start with the {{ exceptions.by_check_name.carrier_before_purchase? | int }} impossible shipping dates.
+
+*Source: `reports/metrics.json`, generated {{ generated_at }} by `run_pipeline.py`. Data: Brazilian E-Commerce Public Dataset by Olist (Kaggle), CC BY-NC-SA 4.0.*

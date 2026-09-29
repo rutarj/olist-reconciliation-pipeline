@@ -32,7 +32,7 @@ from fact_reconciliation;
 -- name: gap_by_category
 select
     gap_category,
-    any_value(severity)                                  as severity,
+    string_agg(distinct severity, '/' order by severity) as severity,
     count(*)                                             as orders,
     round(100.0 * count(*) / sum(count(*)) over (), 4)   as share_of_orders_pct,
     sum(abs_gap)                                         as abs_gap_brl,

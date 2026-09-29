@@ -115,6 +115,12 @@ def run_forecast(con: duckdb.DuckDBPyConnection) -> dict:
                      for m, v in zip(future_idx, future)]
 
     excluded = [m.strftime("%Y-%m") for m in full.index if m not in s.index]
+    if best["kind"] == "baseline":
+        verdict = (f"Honest result: a naive baseline wins. {best['model']} beats every model on the holdout, "
+                   f"so the baseline is the forecast. A model that loses to 'same as last month' is not worth shipping.")
+    else:
+        verdict = (f"{best['model']} beats the best naive baseline ({best_baseline['model']}) on the holdout, "
+                   f"so it is used for the forecast.")
     result = {
         "skipped": False,
         "series": [dict(r, used=pd.Timestamp(r["month"]) in s.index) for r in series],
@@ -133,6 +139,7 @@ def run_forecast(con: duckdb.DuckDBPyConnection) -> dict:
         "best_model": best_model["model"],
         "best_model_mape_pct": best_model["holdout_mape_pct"],
         "baseline_wins": best["kind"] == "baseline",
+        "verdict": verdict,
         "forecast": forecast_rows,
     }
     log.info("  holdout MAPE: %s", ", ".join(f"{x['model']}={x['holdout_mape_pct']}" for x in scores))
