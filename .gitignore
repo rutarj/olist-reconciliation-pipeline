@@ -1,0 +1,22 @@
+# Raw data is downloaded by the pipeline (see data/SOURCE.md). Never commit it.
+data/raw/*
+!data/raw/.gitkeep
+
+# Local database and scratch
+*.duckdb
+*.duckdb.wal
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+~$*.xlsx
