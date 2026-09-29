@@ -1,0 +1,7 @@
+payment_type,description,is_card
+boleto,"Boleto bancário (bank slip, paid in cash or online banking)",false
+credit_card,Credit card (can be split into installments),true
+debit_card,Debit card,true
+none,No payment recorded,false
+not_defined,Not in the contract: not_defined,false
+voucher,Voucher / gift card,false

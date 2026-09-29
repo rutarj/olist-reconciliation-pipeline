@@ -1,0 +1,1479 @@
+{
+  "generated_at": "2026-09-29T07:18:58+00:00",
+  "currency": "BRL",
+  "match_tolerance_brl": 0.01,
+  "dataset": {
+    "raw_rows": {
+      "orders": 99441,
+      "order_items": 112650,
+      "order_payments": 103886,
+      "customers": 99441,
+      "products": 32951,
+      "sellers": 3095,
+      "order_reviews": 99224,
+      "category_translation": 71
+    },
+    "raw_rows_total": 550759,
+    "first_purchase_date": "2016-09-04",
+    "last_purchase_date": "2018-10-17"
+  },
+  "data_quality": {
+    "checks_run": 81,
+    "exceptions": 2483,
+    "high": 166,
+    "medium": 869,
+    "low": 1448,
+    "records_with_exceptions": 2312,
+    "records_quarantined": 1035,
+    "pct_rows_clean": 99.58,
+    "row_status": [
+      {
+        "table_name": "order_items",
+        "rows_in": 112650,
+        "clean": 112650,
+        "warning": 0,
+        "quarantined": 0
+      },
+      {
+        "table_name": "order_payments",
+        "rows_in": 103886,
+        "clean": 103797,
+        "warning": 84,
+        "quarantined": 5
+      },
+      {
+        "table_name": "customers",
+        "rows_in": 99441,
+        "clean": 99441,
+        "warning": 0,
+        "quarantined": 0
+      },
+      {
+        "table_name": "orders",
+        "rows_in": 99441,
+        "clean": 98045,
+        "warning": 1193,
+        "quarantined": 203
+      },
+      {
+        "table_name": "order_reviews",
+        "rows_in": 99224,
+        "clean": 98410,
+        "warning": 0,
+        "quarantined": 814
+      },
+      {
+        "table_name": "products",
+        "rows_in": 32951,
+        "clean": 32938,
+        "warning": 0,
+        "quarantined": 13
+      },
+      {
+        "table_name": "sellers",
+        "rows_in": 3095,
+        "clean": 3095,
+        "warning": 0,
+        "quarantined": 0
+      },
+      {
+        "table_name": "category_translation",
+        "rows_in": 71,
+        "clean": 71,
+        "warning": 0,
+        "quarantined": 0
+      }
+    ]
+  },
+  "reconciliation": {
+    "orders_total": 99441,
+    "orders_in_orders_table": 99441,
+    "orders_in_both_systems": 98665,
+    "orders_matched": 98362,
+    "orders_unmatched": 1079,
+    "orders_value_mismatch": 303,
+    "match_rate_pct": 98.9149,
+    "match_rate_both_systems_pct": 99.6929,
+    "sold_brl": 15843553.24,
+    "paid_brl": 16008872.12,
+    "abs_gap_brl": 166004.63,
+    "net_gap_brl": 165319.55,
+    "avg_abs_gap_brl": 153.85,
+    "value_mismatch_abs_gap_brl": 3269.22,
+    "value_mismatch_avg_abs_gap_brl": 10.79,
+    "orders_unexplained": 5,
+    "unexplained_abs_gap_brl": 77.54,
+    "orders_high_severity": 14,
+    "high_severity_abs_gap_brl": 1136.06,
+    "abs_gap_pct_of_paid": 1.037,
+    "categories": [
+      {
+        "gap_category": "missing_items",
+        "severity": "medium",
+        "orders": 775,
+        "share_of_orders_pct": 71.8258,
+        "abs_gap_brl": 162591.95,
+        "net_gap_brl": 162591.95,
+        "avg_abs_gap_brl": 209.8,
+        "share_of_unmatched_gap_pct": 97.94
+      },
+      {
+        "gap_category": "installment_interest",
+        "severity": "low",
+        "orders": 232,
+        "share_of_orders_pct": 21.5014,
+        "abs_gap_brl": 3050.01,
+        "net_gap_brl": 3050.01,
+        "avg_abs_gap_brl": 13.15,
+        "share_of_unmatched_gap_pct": 1.84
+      },
+      {
+        "gap_category": "missing_payment",
+        "severity": "high",
+        "orders": 1,
+        "share_of_orders_pct": 0.0927,
+        "abs_gap_brl": 143.46,
+        "net_gap_brl": -143.46,
+        "avg_abs_gap_brl": 143.46,
+        "share_of_unmatched_gap_pct": 0.09
+      },
+      {
+        "gap_category": "untracked_discount",
+        "severity": "medium",
+        "orders": 15,
+        "share_of_orders_pct": 1.3902,
+        "abs_gap_brl": 123.19,
+        "net_gap_brl": -123.19,
+        "avg_abs_gap_brl": 8.21,
+        "share_of_unmatched_gap_pct": 0.07
+      },
+      {
+        "gap_category": "unexplained",
+        "severity": "high",
+        "orders": 5,
+        "share_of_orders_pct": 0.4634,
+        "abs_gap_brl": 77.54,
+        "net_gap_brl": -73.22,
+        "avg_abs_gap_brl": 15.51,
+        "share_of_unmatched_gap_pct": 0.05
+      },
+      {
+        "gap_category": "voucher_related",
+        "severity": "medium",
+        "orders": 7,
+        "share_of_orders_pct": 0.6487,
+        "abs_gap_brl": 17.48,
+        "net_gap_brl": 17.48,
+        "avg_abs_gap_brl": 2.5,
+        "share_of_unmatched_gap_pct": 0.01
+      },
+      {
+        "gap_category": "rounding",
+        "severity": "low",
+        "orders": 44,
+        "share_of_orders_pct": 4.0778,
+        "abs_gap_brl": 1.0,
+        "net_gap_brl": -0.02,
+        "avg_abs_gap_brl": 0.02,
+        "share_of_unmatched_gap_pct": 0.0
+      }
+    ],
+    "by_category": {
+      "missing_items": {
+        "gap_category": "missing_items",
+        "severity": "medium",
+        "orders": 775,
+        "share_of_orders_pct": 71.8258,
+        "abs_gap_brl": 162591.95,
+        "net_gap_brl": 162591.95,
+        "avg_abs_gap_brl": 209.8,
+        "share_of_unmatched_gap_pct": 97.94
+      },
+      "installment_interest": {
+        "gap_category": "installment_interest",
+        "severity": "low",
+        "orders": 232,
+        "share_of_orders_pct": 21.5014,
+        "abs_gap_brl": 3050.01,
+        "net_gap_brl": 3050.01,
+        "avg_abs_gap_brl": 13.15,
+        "share_of_unmatched_gap_pct": 1.84
+      },
+      "missing_payment": {
+        "gap_category": "missing_payment",
+        "severity": "high",
+        "orders": 1,
+        "share_of_orders_pct": 0.0927,
+        "abs_gap_brl": 143.46,
+        "net_gap_brl": -143.46,
+        "avg_abs_gap_brl": 143.46,
+        "share_of_unmatched_gap_pct": 0.09
+      },
+      "untracked_discount": {
+        "gap_category": "untracked_discount",
+        "severity": "medium",
+        "orders": 15,
+        "share_of_orders_pct": 1.3902,
+        "abs_gap_brl": 123.19,
+        "net_gap_brl": -123.19,
+        "avg_abs_gap_brl": 8.21,
+        "share_of_unmatched_gap_pct": 0.07
+      },
+      "unexplained": {
+        "gap_category": "unexplained",
+        "severity": "high",
+        "orders": 5,
+        "share_of_orders_pct": 0.4634,
+        "abs_gap_brl": 77.54,
+        "net_gap_brl": -73.22,
+        "avg_abs_gap_brl": 15.51,
+        "share_of_unmatched_gap_pct": 0.05
+      },
+      "voucher_related": {
+        "gap_category": "voucher_related",
+        "severity": "medium",
+        "orders": 7,
+        "share_of_orders_pct": 0.6487,
+        "abs_gap_brl": 17.48,
+        "net_gap_brl": 17.48,
+        "avg_abs_gap_brl": 2.5,
+        "share_of_unmatched_gap_pct": 0.01
+      },
+      "rounding": {
+        "gap_category": "rounding",
+        "severity": "low",
+        "orders": 44,
+        "share_of_orders_pct": 4.0778,
+        "abs_gap_brl": 1.0,
+        "net_gap_brl": -0.02,
+        "avg_abs_gap_brl": 0.02,
+        "share_of_unmatched_gap_pct": 0.0
+      }
+    },
+    "pareto": {
+      "orders_for_80pct_of_gap": 344,
+      "unmatched_orders": 1079
+    },
+    "interest": {
+      "interest_orders": 232,
+      "on_shared_ratio": 162,
+      "on_shared_ratio_pct": 69.83,
+      "shared_ratios": 20,
+      "median_gap_pct_2x": 3.46,
+      "median_gap_pct_12x": 15.5,
+      "by_installments": [
+        {
+          "max_installments": 2,
+          "orders": 10,
+          "median_gap_pct": 3.46,
+          "min_gap_pct": 0.43,
+          "max_gap_pct": 8.19
+        },
+        {
+          "max_installments": 3,
+          "orders": 33,
+          "median_gap_pct": 4.64,
+          "min_gap_pct": 0.79,
+          "max_gap_pct": 15.51
+        },
+        {
+          "max_installments": 4,
+          "orders": 33,
+          "median_gap_pct": 5.8,
+          "min_gap_pct": 0.74,
+          "max_gap_pct": 15.52
+        },
+        {
+          "max_installments": 5,
+          "orders": 29,
+          "median_gap_pct": 6.99,
+          "min_gap_pct": 6.97,
+          "max_gap_pct": 15.51
+        },
+        {
+          "max_installments": 6,
+          "orders": 28,
+          "median_gap_pct": 8.18,
+          "min_gap_pct": 1.74,
+          "max_gap_pct": 15.5
+        },
+        {
+          "max_installments": 7,
+          "orders": 18,
+          "median_gap_pct": 13.03,
+          "min_gap_pct": 7.51,
+          "max_gap_pct": 15.51
+        },
+        {
+          "max_installments": 8,
+          "orders": 16,
+          "median_gap_pct": 13.03,
+          "min_gap_pct": 0.53,
+          "max_gap_pct": 28.92
+        },
+        {
+          "max_installments": 9,
+          "orders": 7,
+          "median_gap_pct": 13.03,
+          "min_gap_pct": 11.26,
+          "max_gap_pct": 23.98
+        },
+        {
+          "max_installments": 10,
+          "orders": 34,
+          "median_gap_pct": 13.02,
+          "min_gap_pct": 9.53,
+          "max_gap_pct": 41.34
+        },
+        {
+          "max_installments": 11,
+          "orders": 4,
+          "median_gap_pct": 10.42,
+          "min_gap_pct": 10.41,
+          "max_gap_pct": 14.24
+        },
+        {
+          "max_installments": 12,
+          "orders": 14,
+          "median_gap_pct": 15.5,
+          "min_gap_pct": 15.49,
+          "max_gap_pct": 15.51
+        },
+        {
+          "max_installments": 13,
+          "orders": 1,
+          "median_gap_pct": 23.95,
+          "min_gap_pct": 23.95,
+          "max_gap_pct": 23.95
+        },
+        {
+          "max_installments": 15,
+          "orders": 2,
+          "median_gap_pct": 23.53,
+          "min_gap_pct": 18.13,
+          "max_gap_pct": 28.92
+        },
+        {
+          "max_installments": 20,
+          "orders": 1,
+          "median_gap_pct": 23.96,
+          "min_gap_pct": 23.96,
+          "max_gap_pct": 23.96
+        },
+        {
+          "max_installments": 21,
+          "orders": 1,
+          "median_gap_pct": 25.21,
+          "min_gap_pct": 25.21,
+          "max_gap_pct": 25.21
+        },
+        {
+          "max_installments": 24,
+          "orders": 1,
+          "median_gap_pct": 28.94,
+          "min_gap_pct": 28.94,
+          "max_gap_pct": 28.94
+        }
+      ]
+    },
+    "discount_split": [
+      {
+        "main_payment_type": "credit_card",
+        "discount_pct": 10.0,
+        "orders": 8
+      },
+      {
+        "main_payment_type": "debit_card",
+        "discount_pct": 5.0,
+        "orders": 6
+      },
+      {
+        "main_payment_type": "debit_card",
+        "discount_pct": 10.0,
+        "orders": 1
+      }
+    ],
+    "missing_items": {
+      "orders": 775,
+      "paid_brl": 162591.95,
+      "canceled_or_unavailable": 767,
+      "canceled_or_unavailable_brl": 161676.89,
+      "canceled_or_unavailable_pct": 98.97,
+      "open_orders": 8,
+      "open_orders_brl": 915.06
+    },
+    "sequence_gaps": {
+      "orders_with_sequence_gap": 80,
+      "still_matched": 79
+    },
+    "top_states": [
+      {
+        "state_code": "SP",
+        "state_name": "São Paulo",
+        "region": "Southeast",
+        "orders": 41746,
+        "unmatched": 489,
+        "unmatched_rate_pct": 1.17,
+        "abs_gap_brl": 76991.14,
+        "rank_by_unmatched": 1
+      },
+      {
+        "state_code": "MG",
+        "state_name": "Minas Gerais",
+        "region": "Southeast",
+        "orders": 11635,
+        "unmatched": 127,
+        "unmatched_rate_pct": 1.09,
+        "abs_gap_brl": 16113.91,
+        "rank_by_unmatched": 2
+      },
+      {
+        "state_code": "RJ",
+        "state_name": "Rio de Janeiro",
+        "region": "Southeast",
+        "orders": 12852,
+        "unmatched": 126,
+        "unmatched_rate_pct": 0.98,
+        "abs_gap_brl": 14837.38,
+        "rank_by_unmatched": 3
+      },
+      {
+        "state_code": "PR",
+        "state_name": "Paraná",
+        "region": "South",
+        "orders": 5045,
+        "unmatched": 63,
+        "unmatched_rate_pct": 1.25,
+        "abs_gap_brl": 10278.42,
+        "rank_by_unmatched": 4
+      },
+      {
+        "state_code": "RS",
+        "state_name": "Rio Grande do Sul",
+        "region": "South",
+        "orders": 5466,
+        "unmatched": 52,
+        "unmatched_rate_pct": 0.95,
+        "abs_gap_brl": 5071.92,
+        "rank_by_unmatched": 5
+      },
+      {
+        "state_code": "SC",
+        "state_name": "Santa Catarina",
+        "region": "South",
+        "orders": 3637,
+        "unmatched": 39,
+        "unmatched_rate_pct": 1.07,
+        "abs_gap_brl": 12872.83,
+        "rank_by_unmatched": 6
+      },
+      {
+        "state_code": "BA",
+        "state_name": "Bahia",
+        "region": "Northeast",
+        "orders": 3380,
+        "unmatched": 37,
+        "unmatched_rate_pct": 1.09,
+        "abs_gap_brl": 5139.19,
+        "rank_by_unmatched": 7
+      },
+      {
+        "state_code": "GO",
+        "state_name": "Goiás",
+        "region": "Center-West",
+        "orders": 2020,
+        "unmatched": 21,
+        "unmatched_rate_pct": 1.04,
+        "abs_gap_brl": 2385.43,
+        "rank_by_unmatched": 8
+      },
+      {
+        "state_code": "DF",
+        "state_name": "Distrito Federal",
+        "region": "Center-West",
+        "orders": 2140,
+        "unmatched": 19,
+        "unmatched_rate_pct": 0.89,
+        "abs_gap_brl": 1931.64,
+        "rank_by_unmatched": 9
+      },
+      {
+        "state_code": "ES",
+        "state_name": "Espírito Santo",
+        "region": "Southeast",
+        "orders": 2033,
+        "unmatched": 15,
+        "unmatched_rate_pct": 0.74,
+        "abs_gap_brl": 1165.7,
+        "rank_by_unmatched": 10
+      }
+    ],
+    "top_state": {
+      "state_code": "SP",
+      "state_name": "São Paulo",
+      "region": "Southeast",
+      "orders": 41746,
+      "unmatched": 489,
+      "unmatched_rate_pct": 1.17,
+      "abs_gap_brl": 76991.14,
+      "rank_by_unmatched": 1
+    },
+    "top_categories": [
+      {
+        "category_name_en": "bed_bath_table",
+        "orders": 9328,
+        "unmatched": 40,
+        "unmatched_rate_pct": 0.43,
+        "abs_gap_brl": 523.42,
+        "rank_by_unmatched": 1
+      },
+      {
+        "category_name_en": "furniture_decor",
+        "orders": 6330,
+        "unmatched": 25,
+        "unmatched_rate_pct": 0.39,
+        "abs_gap_brl": 306.7,
+        "rank_by_unmatched": 2
+      },
+      {
+        "category_name_en": "computers_accessories",
+        "orders": 6670,
+        "unmatched": 21,
+        "unmatched_rate_pct": 0.31,
+        "abs_gap_brl": 122.89,
+        "rank_by_unmatched": 3
+      },
+      {
+        "category_name_en": "telephony",
+        "orders": 4179,
+        "unmatched": 21,
+        "unmatched_rate_pct": 0.5,
+        "abs_gap_brl": 114.63,
+        "rank_by_unmatched": 3
+      },
+      {
+        "category_name_en": "housewares",
+        "orders": 5821,
+        "unmatched": 18,
+        "unmatched_rate_pct": 0.31,
+        "abs_gap_brl": 88.52,
+        "rank_by_unmatched": 5
+      },
+      {
+        "category_name_en": "health_beauty",
+        "orders": 8801,
+        "unmatched": 17,
+        "unmatched_rate_pct": 0.19,
+        "abs_gap_brl": 409.49,
+        "rank_by_unmatched": 6
+      },
+      {
+        "category_name_en": "sports_leisure",
+        "orders": 7683,
+        "unmatched": 17,
+        "unmatched_rate_pct": 0.22,
+        "abs_gap_brl": 100.72,
+        "rank_by_unmatched": 6
+      },
+      {
+        "category_name_en": "cool_stuff",
+        "orders": 3603,
+        "unmatched": 14,
+        "unmatched_rate_pct": 0.39,
+        "abs_gap_brl": 177.63,
+        "rank_by_unmatched": 8
+      },
+      {
+        "category_name_en": "toys",
+        "orders": 3870,
+        "unmatched": 11,
+        "unmatched_rate_pct": 0.28,
+        "abs_gap_brl": 130.93,
+        "rank_by_unmatched": 9
+      },
+      {
+        "category_name_en": "baby",
+        "orders": 2837,
+        "unmatched": 11,
+        "unmatched_rate_pct": 0.39,
+        "abs_gap_brl": 51.6,
+        "rank_by_unmatched": 9
+      }
+    ],
+    "top_category": {
+      "category_name_en": "bed_bath_table",
+      "orders": 9328,
+      "unmatched": 40,
+      "unmatched_rate_pct": 0.43,
+      "abs_gap_brl": 523.42,
+      "rank_by_unmatched": 1
+    },
+    "payment_mix": [
+      {
+        "payment_type": "credit_card",
+        "description": "Credit card (can be split into installments)",
+        "orders": 74975,
+        "unmatched": 773,
+        "unmatched_rate_pct": 1.03,
+        "abs_gap_brl": 108509.28
+      },
+      {
+        "payment_type": "boleto",
+        "description": "Boleto bancário (bank slip, paid in cash or online banking)",
+        "orders": 19784,
+        "unmatched": 184,
+        "unmatched_rate_pct": 0.93,
+        "abs_gap_brl": 27121.43
+      },
+      {
+        "payment_type": "voucher",
+        "description": "Voucher / gift card",
+        "orders": 3151,
+        "unmatched": 104,
+        "unmatched_rate_pct": 3.3,
+        "abs_gap_brl": 27294.45
+      },
+      {
+        "payment_type": "debit_card",
+        "description": "Debit card",
+        "orders": 1527,
+        "unmatched": 14,
+        "unmatched_rate_pct": 0.92,
+        "abs_gap_brl": 2936.01
+      },
+      {
+        "payment_type": "not_defined",
+        "description": "Not in the contract: not_defined",
+        "orders": 3,
+        "unmatched": 3,
+        "unmatched_rate_pct": 100.0,
+        "abs_gap_brl": 0.0
+      },
+      {
+        "payment_type": "none",
+        "description": "No payment recorded",
+        "orders": 1,
+        "unmatched": 1,
+        "unmatched_rate_pct": 100.0,
+        "abs_gap_brl": 143.46
+      }
+    ]
+  },
+  "exceptions": {
+    "total": 3562,
+    "by_severity": [
+      {
+        "severity": "high",
+        "exceptions": 180,
+        "data_quality": 166,
+        "reconciliation": 14
+      },
+      {
+        "severity": "medium",
+        "exceptions": 1658,
+        "data_quality": 869,
+        "reconciliation": 789
+      },
+      {
+        "severity": "low",
+        "exceptions": 1724,
+        "data_quality": 1448,
+        "reconciliation": 276
+      }
+    ],
+    "by_check": [
+      {
+        "source": "data_quality",
+        "table_name": "orders",
+        "check_name": "carrier_before_purchase",
+        "severity": "high",
+        "exceptions": 166
+      },
+      {
+        "source": "reconciliation",
+        "table_name": "reconciliation",
+        "check_name": "recon_missing_items",
+        "severity": "high",
+        "exceptions": 8
+      },
+      {
+        "source": "reconciliation",
+        "table_name": "reconciliation",
+        "check_name": "recon_unexplained",
+        "severity": "high",
+        "exceptions": 5
+      },
+      {
+        "source": "reconciliation",
+        "table_name": "reconciliation",
+        "check_name": "recon_missing_payment",
+        "severity": "high",
+        "exceptions": 1
+      },
+      {
+        "source": "data_quality",
+        "table_name": "order_reviews",
+        "check_name": "duplicate_key",
+        "severity": "medium",
+        "exceptions": 814
+      },
+      {
+        "source": "reconciliation",
+        "table_name": "reconciliation",
+        "check_name": "recon_missing_items",
+        "severity": "medium",
+        "exceptions": 767
+      },
+      {
+        "source": "data_quality",
+        "table_name": "orders",
+        "check_name": "delivered_before_carrier",
+        "severity": "medium",
+        "exceptions": 23
+      },
+      {
+        "source": "reconciliation",
+        "table_name": "reconciliation",
+        "check_name": "recon_untracked_discount",
+        "severity": "medium",
+        "exceptions": 15
+      },
+      {
+        "source": "data_quality",
+        "table_name": "products",
+        "check_name": "orphan_foreign_key",
+        "severity": "medium",
+        "exceptions": 13
+      },
+      {
+        "source": "data_quality",
+        "table_name": "orders",
+        "check_name": "delivered_without_date",
+        "severity": "medium",
+        "exceptions": 8
+      },
+      {
+        "source": "reconciliation",
+        "table_name": "reconciliation",
+        "check_name": "recon_voucher_related",
+        "severity": "medium",
+        "exceptions": 7
+      },
+      {
+        "source": "data_quality",
+        "table_name": "orders",
+        "check_name": "delivery_date_on_undelivered_order",
+        "severity": "medium",
+        "exceptions": 6
+      },
+      {
+        "source": "data_quality",
+        "table_name": "order_payments",
+        "check_name": "allowed_values",
+        "severity": "medium",
+        "exceptions": 3
+      },
+      {
+        "source": "data_quality",
+        "table_name": "order_payments",
+        "check_name": "invalid_installments",
+        "severity": "medium",
+        "exceptions": 2
+      },
+      {
+        "source": "data_quality",
+        "table_name": "orders",
+        "check_name": "carrier_before_approval",
+        "severity": "low",
+        "exceptions": 1359
+      },
+      {
+        "source": "reconciliation",
+        "table_name": "reconciliation",
+        "check_name": "recon_installment_interest",
+        "severity": "low",
+        "exceptions": 232
+      },
+      {
+        "source": "data_quality",
+        "table_name": "order_payments",
+        "check_name": "payment_sequence_gap",
+        "severity": "low",
+        "exceptions": 80
+      },
+      {
+        "source": "reconciliation",
+        "table_name": "reconciliation",
+        "check_name": "recon_rounding",
+        "severity": "low",
+        "exceptions": 44
+      },
+      {
+        "source": "data_quality",
+        "table_name": "order_payments",
+        "check_name": "zero_value_payment",
+        "severity": "low",
+        "exceptions": 9
+      }
+    ]
+  },
+  "kpis": {
+    "delivery": {
+      "delivered_orders": 96476,
+      "on_time_orders": 89941,
+      "late_orders": 6535,
+      "on_time_rate_pct": 93.23,
+      "late_rate_pct": 6.77,
+      "median_delivery_days": 10.0,
+      "avg_review_on_time": 4.29,
+      "avg_review_late": 2.272
+    },
+    "reviews_by_match": {
+      "matched": {
+        "reconciliation_status": "matched",
+        "orders": 98362,
+        "orders_with_review": 97616,
+        "avg_review_score": 4.106,
+        "pct_reviews_1_or_2": 14.13
+      },
+      "unmatched": {
+        "reconciliation_status": "unmatched",
+        "orders": 1079,
+        "orders_with_review": 1057,
+        "avg_review_score": 2.33,
+        "pct_reviews_1_or_2": 61.87
+      }
+    },
+    "reviews_by_category": {
+      "matched": {
+        "gap_category": "matched",
+        "orders": 98362,
+        "orders_with_review": 97616,
+        "avg_review_score": 4.106
+      },
+      "missing_items": {
+        "gap_category": "missing_items",
+        "orders": 775,
+        "orders_with_review": 756,
+        "avg_review_score": 1.722
+      },
+      "installment_interest": {
+        "gap_category": "installment_interest",
+        "orders": 232,
+        "orders_with_review": 230,
+        "avg_review_score": 4.043
+      },
+      "rounding": {
+        "gap_category": "rounding",
+        "orders": 44,
+        "orders_with_review": 43,
+        "avg_review_score": 3.116
+      },
+      "untracked_discount": {
+        "gap_category": "untracked_discount",
+        "orders": 15,
+        "orders_with_review": 15,
+        "avg_review_score": 3.933
+      },
+      "voucher_related": {
+        "gap_category": "voucher_related",
+        "orders": 7,
+        "orders_with_review": 7,
+        "avg_review_score": 2.857
+      },
+      "unexplained": {
+        "gap_category": "unexplained",
+        "orders": 5,
+        "orders_with_review": 5,
+        "avg_review_score": 3.4
+      },
+      "missing_payment": {
+        "gap_category": "missing_payment",
+        "orders": 1,
+        "orders_with_review": 1,
+        "avg_review_score": 1.0
+      }
+    },
+    "monthly": [
+      {
+        "month": "2016-09",
+        "orders": 4,
+        "matched": 2,
+        "unmatched": 2,
+        "match_rate_pct": 50.0,
+        "abs_gap_brl": 184.41,
+        "sold_brl": 354.75,
+        "exceptions": 2,
+        "delivered": 1,
+        "on_time_rate_pct": 0.0
+      },
+      {
+        "month": "2016-10",
+        "orders": 324,
+        "matched": 303,
+        "unmatched": 21,
+        "match_rate_pct": 93.52,
+        "abs_gap_brl": 2412.4,
+        "sold_brl": 56808.84,
+        "exceptions": 30,
+        "delivered": 270,
+        "on_time_rate_pct": 99.26
+      },
+      {
+        "month": "2016-12",
+        "orders": 1,
+        "matched": 1,
+        "unmatched": 0,
+        "match_rate_pct": 100.0,
+        "abs_gap_brl": 0.0,
+        "sold_brl": 19.62,
+        "exceptions": 0,
+        "delivered": 1,
+        "on_time_rate_pct": 100.0
+      },
+      {
+        "month": "2017-01",
+        "orders": 800,
+        "matched": 782,
+        "unmatched": 18,
+        "match_rate_pct": 97.75,
+        "abs_gap_brl": 1299.64,
+        "sold_brl": 137188.49,
+        "exceptions": 19,
+        "delivered": 750,
+        "on_time_rate_pct": 97.07
+      },
+      {
+        "month": "2017-02",
+        "orders": 1780,
+        "matched": 1721,
+        "unmatched": 59,
+        "match_rate_pct": 96.69,
+        "abs_gap_brl": 5627.41,
+        "sold_brl": 286280.62,
+        "exceptions": 62,
+        "delivered": 1653,
+        "on_time_rate_pct": 97.04
+      },
+      {
+        "month": "2017-03",
+        "orders": 2682,
+        "matched": 2636,
+        "unmatched": 46,
+        "match_rate_pct": 98.28,
+        "abs_gap_brl": 17815.03,
+        "sold_brl": 432048.59,
+        "exceptions": 47,
+        "delivered": 2546,
+        "on_time_rate_pct": 95.44
+      },
+      {
+        "month": "2017-04",
+        "orders": 2404,
+        "matched": 2378,
+        "unmatched": 26,
+        "match_rate_pct": 98.92,
+        "abs_gap_brl": 5365.87,
+        "sold_brl": 412422.24,
+        "exceptions": 53,
+        "delivered": 2303,
+        "on_time_rate_pct": 93.44
+      },
+      {
+        "month": "2017-05",
+        "orders": 3700,
+        "matched": 3639,
+        "unmatched": 61,
+        "match_rate_pct": 98.35,
+        "abs_gap_brl": 6727.85,
+        "sold_brl": 586190.95,
+        "exceptions": 78,
+        "delivered": 3545,
+        "on_time_rate_pct": 97.01
+      },
+      {
+        "month": "2017-06",
+        "orders": 3245,
+        "matched": 3202,
+        "unmatched": 43,
+        "match_rate_pct": 98.67,
+        "abs_gap_brl": 8313.36,
+        "sold_brl": 502963.04,
+        "exceptions": 49,
+        "delivered": 3135,
+        "on_time_rate_pct": 96.97
+      },
+      {
+        "month": "2017-07",
+        "orders": 4026,
+        "matched": 3958,
+        "unmatched": 68,
+        "match_rate_pct": 98.31,
+        "abs_gap_brl": 7411.47,
+        "sold_brl": 584971.62,
+        "exceptions": 100,
+        "delivered": 3872,
+        "on_time_rate_pct": 97.21
+      },
+      {
+        "month": "2017-08",
+        "orders": 4331,
+        "matched": 4286,
+        "unmatched": 45,
+        "match_rate_pct": 98.96,
+        "abs_gap_brl": 6191.76,
+        "sold_brl": 668204.6,
+        "exceptions": 48,
+        "delivered": 4193,
+        "on_time_rate_pct": 97.09
+      },
+      {
+        "month": "2017-09",
+        "orders": 4285,
+        "matched": 4235,
+        "unmatched": 50,
+        "match_rate_pct": 98.83,
+        "abs_gap_brl": 7363.6,
+        "sold_brl": 720398.91,
+        "exceptions": 64,
+        "delivered": 4150,
+        "on_time_rate_pct": 95.61
+      },
+      {
+        "month": "2017-10",
+        "orders": 4631,
+        "matched": 4558,
+        "unmatched": 73,
+        "match_rate_pct": 98.42,
+        "abs_gap_brl": 10365.62,
+        "sold_brl": 769312.37,
+        "exceptions": 77,
+        "delivered": 4478,
+        "on_time_rate_pct": 95.82
+      },
+      {
+        "month": "2017-11",
+        "orders": 7544,
+        "matched": 7432,
+        "unmatched": 112,
+        "match_rate_pct": 98.52,
+        "abs_gap_brl": 15739.17,
+        "sold_brl": 1179143.77,
+        "exceptions": 114,
+        "delivered": 7288,
+        "on_time_rate_pct": 87.6
+      },
+      {
+        "month": "2017-12",
+        "orders": 5673,
+        "matched": 5604,
+        "unmatched": 69,
+        "match_rate_pct": 98.78,
+        "abs_gap_brl": 14854.36,
+        "sold_brl": 863547.23,
+        "exceptions": 75,
+        "delivered": 5513,
+        "on_time_rate_pct": 92.54
+      },
+      {
+        "month": "2018-01",
+        "orders": 7269,
+        "matched": 7176,
+        "unmatched": 93,
+        "match_rate_pct": 98.72,
+        "abs_gap_brl": 7702.43,
+        "sold_brl": 1107301.89,
+        "exceptions": 129,
+        "delivered": 7069,
+        "on_time_rate_pct": 94.3
+      },
+      {
+        "month": "2018-02",
+        "orders": 6728,
+        "matched": 6664,
+        "unmatched": 64,
+        "match_rate_pct": 99.05,
+        "abs_gap_brl": 5554.42,
+        "sold_brl": 986908.96,
+        "exceptions": 87,
+        "delivered": 6556,
+        "on_time_rate_pct": 85.86
+      },
+      {
+        "month": "2018-03",
+        "orders": 7211,
+        "matched": 7179,
+        "unmatched": 32,
+        "match_rate_pct": 99.56,
+        "abs_gap_brl": 4525.42,
+        "sold_brl": 1155126.82,
+        "exceptions": 39,
+        "delivered": 7003,
+        "on_time_rate_pct": 81.04
+      },
+      {
+        "month": "2018-04",
+        "orders": 6939,
+        "matched": 6919,
+        "unmatched": 20,
+        "match_rate_pct": 99.71,
+        "abs_gap_brl": 1087.6,
+        "sold_brl": 1159698.04,
+        "exceptions": 441,
+        "delivered": 6798,
+        "on_time_rate_pct": 95.5
+      },
+      {
+        "month": "2018-05",
+        "orders": 6873,
+        "matched": 6845,
+        "unmatched": 28,
+        "match_rate_pct": 99.59,
+        "abs_gap_brl": 4200.46,
+        "sold_brl": 1149781.82,
+        "exceptions": 136,
+        "delivered": 6749,
+        "on_time_rate_pct": 93.44
+      },
+      {
+        "month": "2018-06",
+        "orders": 6167,
+        "matched": 6153,
+        "unmatched": 14,
+        "match_rate_pct": 99.77,
+        "abs_gap_brl": 1203.41,
+        "sold_brl": 1022677.11,
+        "exceptions": 196,
+        "delivered": 6096,
+        "on_time_rate_pct": 98.84
+      },
+      {
+        "month": "2018-07",
+        "orders": 6292,
+        "matched": 6262,
+        "unmatched": 30,
+        "match_rate_pct": 99.52,
+        "abs_gap_brl": 7812.85,
+        "sold_brl": 1058728.03,
+        "exceptions": 647,
+        "delivered": 6156,
+        "on_time_rate_pct": 96.62
+      },
+      {
+        "month": "2018-08",
+        "orders": 6512,
+        "matched": 6426,
+        "unmatched": 86,
+        "match_rate_pct": 98.68,
+        "abs_gap_brl": 19383.34,
+        "sold_brl": 1003308.47,
+        "exceptions": 221,
+        "delivered": 6351,
+        "on_time_rate_pct": 93.81
+      },
+      {
+        "month": "2018-09",
+        "orders": 16,
+        "matched": 1,
+        "unmatched": 15,
+        "match_rate_pct": 6.25,
+        "abs_gap_brl": 4273.08,
+        "sold_brl": 166.46,
+        "exceptions": 17,
+        "delivered": 0,
+        "on_time_rate_pct": null
+      },
+      {
+        "month": "2018-10",
+        "orders": 4,
+        "matched": 0,
+        "unmatched": 4,
+        "match_rate_pct": 0.0,
+        "abs_gap_brl": 589.67,
+        "sold_brl": null,
+        "exceptions": 4,
+        "delivered": 0,
+        "on_time_rate_pct": null
+      }
+    ]
+  },
+  "forecast": {
+    "skipped": false,
+    "series": [
+      {
+        "month": "2016-09",
+        "orders": 4,
+        "used": false
+      },
+      {
+        "month": "2016-10",
+        "orders": 324,
+        "used": false
+      },
+      {
+        "month": "2016-11",
+        "orders": 0,
+        "used": false
+      },
+      {
+        "month": "2016-12",
+        "orders": 1,
+        "used": false
+      },
+      {
+        "month": "2017-01",
+        "orders": 800,
+        "used": true
+      },
+      {
+        "month": "2017-02",
+        "orders": 1780,
+        "used": true
+      },
+      {
+        "month": "2017-03",
+        "orders": 2682,
+        "used": true
+      },
+      {
+        "month": "2017-04",
+        "orders": 2404,
+        "used": true
+      },
+      {
+        "month": "2017-05",
+        "orders": 3700,
+        "used": true
+      },
+      {
+        "month": "2017-06",
+        "orders": 3245,
+        "used": true
+      },
+      {
+        "month": "2017-07",
+        "orders": 4026,
+        "used": true
+      },
+      {
+        "month": "2017-08",
+        "orders": 4331,
+        "used": true
+      },
+      {
+        "month": "2017-09",
+        "orders": 4285,
+        "used": true
+      },
+      {
+        "month": "2017-10",
+        "orders": 4631,
+        "used": true
+      },
+      {
+        "month": "2017-11",
+        "orders": 7544,
+        "used": true
+      },
+      {
+        "month": "2017-12",
+        "orders": 5673,
+        "used": true
+      },
+      {
+        "month": "2018-01",
+        "orders": 7269,
+        "used": true
+      },
+      {
+        "month": "2018-02",
+        "orders": 6728,
+        "used": true
+      },
+      {
+        "month": "2018-03",
+        "orders": 7211,
+        "used": true
+      },
+      {
+        "month": "2018-04",
+        "orders": 6939,
+        "used": true
+      },
+      {
+        "month": "2018-05",
+        "orders": 6873,
+        "used": true
+      },
+      {
+        "month": "2018-06",
+        "orders": 6167,
+        "used": true
+      },
+      {
+        "month": "2018-07",
+        "orders": 6292,
+        "used": true
+      },
+      {
+        "month": "2018-08",
+        "orders": 6512,
+        "used": true
+      },
+      {
+        "month": "2018-09",
+        "orders": 16,
+        "used": false
+      },
+      {
+        "month": "2018-10",
+        "orders": 4,
+        "used": false
+      }
+    ],
+    "window_start": "2017-01",
+    "window_end": "2018-08",
+    "train_months": 17,
+    "holdout_months": [
+      "2018-06",
+      "2018-07",
+      "2018-08"
+    ],
+    "excluded_months": [
+      "2016-09",
+      "2016-10",
+      "2016-11",
+      "2016-12",
+      "2018-09",
+      "2018-10"
+    ],
+    "scores": [
+      {
+        "model": "naive_last_value",
+        "kind": "baseline",
+        "holdout_mape_pct": 8.74
+      },
+      {
+        "model": "seasonal_naive_12m",
+        "kind": "baseline",
+        "holdout_mape_pct": 38.96
+      },
+      {
+        "model": "moving_average_3m",
+        "kind": "model",
+        "holdout_mape_pct": 10.87
+      },
+      {
+        "model": "holt_damped_trend",
+        "kind": "model",
+        "holdout_mape_pct": 28.85
+      }
+    ],
+    "holdout": [
+      {
+        "month": "2018-06",
+        "model": "naive_last_value",
+        "actual": 6167,
+        "predicted": 6873.0
+      },
+      {
+        "month": "2018-07",
+        "model": "naive_last_value",
+        "actual": 6292,
+        "predicted": 6873.0
+      },
+      {
+        "month": "2018-08",
+        "model": "naive_last_value",
+        "actual": 6512,
+        "predicted": 6873.0
+      },
+      {
+        "month": "2018-06",
+        "model": "seasonal_naive_12m",
+        "actual": 6167,
+        "predicted": 3245.0
+      },
+      {
+        "month": "2018-07",
+        "model": "seasonal_naive_12m",
+        "actual": 6292,
+        "predicted": 4026.0
+      },
+      {
+        "month": "2018-08",
+        "model": "seasonal_naive_12m",
+        "actual": 6512,
+        "predicted": 4331.0
+      },
+      {
+        "month": "2018-06",
+        "model": "moving_average_3m",
+        "actual": 6167,
+        "predicted": 7008.0
+      },
+      {
+        "month": "2018-07",
+        "model": "moving_average_3m",
+        "actual": 6292,
+        "predicted": 7008.0
+      },
+      {
+        "month": "2018-08",
+        "model": "moving_average_3m",
+        "actual": 6512,
+        "predicted": 7008.0
+      },
+      {
+        "month": "2018-06",
+        "model": "holt_damped_trend",
+        "actual": 6167,
+        "predicted": 7868.0
+      },
+      {
+        "month": "2018-07",
+        "model": "holt_damped_trend",
+        "actual": 6292,
+        "predicted": 8151.0
+      },
+      {
+        "month": "2018-08",
+        "model": "holt_damped_trend",
+        "actual": 6512,
+        "predicted": 8427.0
+      }
+    ],
+    "winner": "naive_last_value",
+    "winner_kind": "baseline",
+    "winner_mape_pct": 8.74,
+    "best_baseline": "naive_last_value",
+    "best_baseline_mape_pct": 8.74,
+    "best_model": "moving_average_3m",
+    "best_model_mape_pct": 10.87,
+    "baseline_wins": true,
+    "forecast": [
+      {
+        "month": "2018-09",
+        "forecast_orders": 6512
+      },
+      {
+        "month": "2018-10",
+        "forecast_orders": 6512
+      },
+      {
+        "month": "2018-11",
+        "forecast_orders": 6512
+      }
+    ],
+    "nov_2017_uplift_vs_oct_pct": 62.9
+  },
+  "star_schema_rows": {
+    "fact_orders": 99441,
+    "fact_reconciliation": 99441,
+    "fact_exceptions": 3562,
+    "dim_date": 800,
+    "dim_customer_state": 28,
+    "dim_payment_type": 6,
+    "dim_product_category": 74
+  }
+}

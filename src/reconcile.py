@@ -14,6 +14,7 @@ import duckdb
 import pandas as pd
 
 from .config import MATCH_TOLERANCE, SQL_DIR
+from .sqlutil import named_queries
 
 log = logging.getLogger(__name__)
 
@@ -67,15 +68,6 @@ CATEGORY_RULES = [
 
 def _run_sql_file(con: duckdb.DuckDBPyConnection, path: Path, **params) -> None:
     con.execute(Template(path.read_text()).substitute(params))
-
-
-def _evidence_queries() -> dict[str, str]:
-    text = (RECON_DIR / "04_evidence.sql").read_text()
-    out = {}
-    for block in text.split("-- name: ")[1:]:
-        name, _, sql = block.partition("\n")
-        out[name.strip()] = sql.strip().rstrip(";")
-    return out
 
 
 def run_reconciliation(con: duckdb.DuckDBPyConnection, evidence_dir: Path | None = None) -> dict:
@@ -145,7 +137,7 @@ def run_reconciliation(con: duckdb.DuckDBPyConnection, evidence_dir: Path | None
 
     if evidence_dir is not None:
         evidence_dir.mkdir(parents=True, exist_ok=True)
-        for name, sql in _evidence_queries().items():
+        for name, sql in named_queries(RECON_DIR / "04_evidence.sql").items():
             con.execute(sql).df().to_csv(evidence_dir / f"{name}.csv", index=False)
         reports_dir = evidence_dir.parent
         con.table("reconciliation_summary").df().to_csv(reports_dir / "reconciliation_summary.csv", index=False)
