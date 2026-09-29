@@ -1,0 +1,8 @@
+order_id,payment_types,expected_total,paid_total,gap,gap_pct
+fbf352b18a26c6a86a53cca922facd25,credit_card+voucher,151.54,160.8,9.26,6.1106
+21ca56b276a6b8d082a1261f33786085,credit_card+voucher,64.0,66.46,2.46,3.8438
+f1c86b9191896bcf9077ec22b6248153,credit_card+voucher,55.8,57.6,1.8,3.2258
+6aaedd714ad6929fc4df8d51bd4cfe9a,credit_card+voucher,61.32,62.99,1.67,2.7234
+5af817dcc7682f13101dbdef134be4e0,credit_card+voucher,44.09,45.42,1.33,3.0166
+6508f1528c3648c8a9f751e811520269,credit_card+voucher,50.1,50.7,0.6,1.1976
+2240d9349c55949c40dbfcc98ece280c,credit_card+voucher,94.59,94.95,0.36,0.3806

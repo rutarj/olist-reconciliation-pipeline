@@ -15,6 +15,7 @@ from src.config import Paths
 from src.download import ensure_raw_data
 from src.load import load_raw
 from src.validate import run_validation
+from src.reconcile import run_reconciliation
 
 log = logging.getLogger("pipeline")
 
@@ -31,8 +32,11 @@ def run(paths: Paths, download: bool = True) -> dict:
     log.info("step 2: validate against schema contracts and business rules")
     dq = run_validation(con)
 
+    log.info("step 3: reconcile sold (order_items) vs paid (order_payments)")
+    recon = run_reconciliation(con, evidence_dir=paths.reports / "evidence")
+
     log.info("done in %.1fs", time.time() - t0)
-    return {"raw_counts": raw_counts, "dq": dq, "con": con}
+    return {"raw_counts": raw_counts, "dq": dq, "recon": recon, "con": con}
 
 
 def main() -> None:
