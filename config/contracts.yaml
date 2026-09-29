@@ -1,0 +1,121 @@
+# Schema contracts: what each raw table MUST look like.
+#
+# One block per table:
+#   primary_key   columns that must be unique together
+#   columns       name: type (DuckDB type), nullable (false = required), allowed (list of legal values)
+#   foreign_keys  column -> table.column that must exist
+#
+# Severity guide
+#   high    money or record counts are wrong if we trust this row (orphans, duplicates, impossible values)
+#   medium  row is usable but a field is suspicious (unknown category, odd status/date combo)
+#   low     worth knowing, no action needed per row
+#
+# Generic checks built from this file (SQL templates in sql/checks/generic/):
+#   duplicate_key, required_null, type_mismatch, allowed_values, orphan_foreign_key
+# Business-rule checks live as plain SQL files in sql/checks/.
+
+defaults:
+  severity:
+    duplicate_key: high
+    required_null: high
+    type_mismatch: high
+    allowed_values: medium
+    orphan_foreign_key: high
+
+tables:
+  orders:
+    primary_key: [order_id]
+    columns:
+      order_id:                      {type: VARCHAR,   nullable: false}
+      customer_id:                   {type: VARCHAR,   nullable: false}
+      order_status:                  {type: VARCHAR,   nullable: false,
+                                      allowed: [created, approved, invoiced, processing, shipped, delivered, canceled, unavailable]}
+      order_purchase_timestamp:      {type: TIMESTAMP, nullable: false}
+      order_approved_at:             {type: TIMESTAMP, nullable: true}
+      order_delivered_carrier_date:  {type: TIMESTAMP, nullable: true}
+      order_delivered_customer_date: {type: TIMESTAMP, nullable: true}
+      order_estimated_delivery_date: {type: TIMESTAMP, nullable: false}
+    foreign_keys:
+      - {column: customer_id, references: customers.customer_id}
+
+  order_items:
+    primary_key: [order_id, order_item_id]
+    columns:
+      order_id:            {type: VARCHAR,       nullable: false}
+      order_item_id:       {type: INTEGER,       nullable: false}
+      product_id:          {type: VARCHAR,       nullable: false}
+      seller_id:           {type: VARCHAR,       nullable: false}
+      shipping_limit_date: {type: TIMESTAMP,     nullable: false}
+      price:               {type: "DECIMAL(12,2)", nullable: false}
+      freight_value:       {type: "DECIMAL(12,2)", nullable: false}
+    foreign_keys:
+      - {column: order_id,   references: orders.order_id}
+      - {column: product_id, references: products.product_id, severity: medium}
+      - {column: seller_id,  references: sellers.seller_id,   severity: medium}
+
+  order_payments:
+    primary_key: [order_id, payment_sequential]
+    columns:
+      order_id:             {type: VARCHAR,       nullable: false}
+      payment_sequential:   {type: INTEGER,       nullable: false}
+      payment_type:         {type: VARCHAR,       nullable: false,
+                             allowed: [credit_card, boleto, voucher, debit_card]}
+      payment_installments: {type: INTEGER,       nullable: false}
+      payment_value:        {type: "DECIMAL(12,2)", nullable: false}
+    foreign_keys:
+      - {column: order_id, references: orders.order_id}
+
+  order_reviews:
+    # review_id should identify one review. The raw data reuses some ids across orders,
+    # so the duplicate check is medium: the review is real, the id is not unique.
+    primary_key: [review_id]
+    primary_key_severity: medium
+    columns:
+      review_id:               {type: VARCHAR,   nullable: false}
+      order_id:                {type: VARCHAR,   nullable: false}
+      review_score:            {type: INTEGER,   nullable: false, allowed: [1, 2, 3, 4, 5]}
+      review_comment_title:    {type: VARCHAR,   nullable: true}
+      review_comment_message:  {type: VARCHAR,   nullable: true}
+      review_creation_date:    {type: TIMESTAMP, nullable: false}
+      review_answer_timestamp: {type: TIMESTAMP, nullable: false}
+    # reviews for unknown orders are checked by sql/checks/reviews_unknown_order.sql
+
+  customers:
+    primary_key: [customer_id]
+    columns:
+      customer_id:              {type: VARCHAR, nullable: false}
+      customer_unique_id:       {type: VARCHAR, nullable: false}
+      customer_zip_code_prefix: {type: VARCHAR, nullable: false}
+      customer_city:            {type: VARCHAR, nullable: false}
+      customer_state:           {type: VARCHAR, nullable: false,
+                                 allowed: [AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR,
+                                           RJ, RN, RO, RR, RS, SC, SE, SP, TO]}
+
+  products:
+    primary_key: [product_id]
+    columns:
+      product_id:                 {type: VARCHAR, nullable: false}
+      product_category_name:      {type: VARCHAR, nullable: true}
+      product_name_lenght:        {type: INTEGER, nullable: true}   # misspelling is in the source file
+      product_description_lenght: {type: INTEGER, nullable: true}
+      product_photos_qty:         {type: INTEGER, nullable: true}
+      product_weight_g:           {type: INTEGER, nullable: true}
+      product_length_cm:          {type: INTEGER, nullable: true}
+      product_height_cm:          {type: INTEGER, nullable: true}
+      product_width_cm:           {type: INTEGER, nullable: true}
+    foreign_keys:
+      - {column: product_category_name, references: category_translation.product_category_name, severity: medium}
+
+  sellers:
+    primary_key: [seller_id]
+    columns:
+      seller_id:              {type: VARCHAR, nullable: false}
+      seller_zip_code_prefix: {type: VARCHAR, nullable: false}
+      seller_city:            {type: VARCHAR, nullable: false}
+      seller_state:           {type: VARCHAR, nullable: false}
+
+  category_translation:
+    primary_key: [product_category_name]
+    columns:
+      product_category_name:         {type: VARCHAR, nullable: false}
+      product_category_name_english: {type: VARCHAR, nullable: false}

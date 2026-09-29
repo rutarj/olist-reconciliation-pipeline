@@ -14,6 +14,7 @@ import duckdb
 from src.config import Paths
 from src.download import ensure_raw_data
 from src.load import load_raw
+from src.validate import run_validation
 
 log = logging.getLogger("pipeline")
 
@@ -24,11 +25,14 @@ def run(paths: Paths, download: bool = True) -> dict:
         ensure_raw_data(paths.raw)
     con = duckdb.connect(paths.db)
 
-    log.info("step 1/1: load raw CSVs")
+    log.info("step 1: load raw CSVs")
     raw_counts = load_raw(con, paths.raw)
 
+    log.info("step 2: validate against schema contracts and business rules")
+    dq = run_validation(con)
+
     log.info("done in %.1fs", time.time() - t0)
-    return {"raw_counts": raw_counts}
+    return {"raw_counts": raw_counts, "dq": dq, "con": con}
 
 
 def main() -> None:
